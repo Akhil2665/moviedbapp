@@ -1,0 +1,218 @@
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #181818;
+  padding: 15px 40px;
+  height: 70px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@media (max-width: 992px) {
+  .navbar-container {
+    padding: 15px 20px;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 10px 15px;
+    height: 60px;
+  }
+}
+
+/* --- Logo --- */
+.logo-heading {
+  font-size: 28px;
+  color: #00bcd4;
+  font-weight: 700;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none; /* Ensure no underline if it's an <a> tag */
+}
+
+@media (max-width: 768px) {
+  .logo-heading {
+    font-size: 24px;
+  }
+}
+
+/* --- Navigation Items List (Desktop) --- */
+.nav-items-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+@media (max-width: 992px) {
+  .nav-items-list {
+    display: none;
+  }
+}
+.logo-heading {
+  font-weight: 600;
+  font-size: 26px;
+  color: #e0e0e0;
+}
+.nav-item {
+  font-weight: 500;
+  font-size: 16px;
+  color: #e0e0e0;
+  transition: color 0.3s ease;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  padding: 8px 0;
+  /* Hover for the link */
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover .nav-link,
+.nav-link:hover {
+  /* Apply hover to the link directly too */
+  color: #00bcd4;
+}
+
+/* Styling for active NavLink from react-router-dom */
+.nav-link.active {
+  color: #00bcd4;
+  border-bottom: 2px solid #00bcd4;
+}
+
+.search-container {
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 280px;
+  overflow: hidden;
+}
+
+/* Styles when search container is used in mobile menu */
+.search-container.mobile {
+  width: 90%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+  .search-container {
+    width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide on smaller screens by default, will be part of the mobile menu */
+  .search-container {
+    display: none;
+  }
+  /* Show only if it has the .mobile class on small screens */
+  .search-container.mobile {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.search-input {
+  height: 40px;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0 15px;
+  background-color: transparent;
+  color: #e0e0e0;
+  font-size: 1em;
+}
+
+.search-input::placeholder {
+  color: #b0b0b0;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #00bcd4;
+  font-size: 1.2em;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  transition: color 0.3s ease;
+}
+
+.search-button:hover {
+  color: #008c9e;
+}
+
+/* --- Mobile Menu Icon (Hamburger/Close) --- */
+.mobile-menu-icon {
+  display: none;
+  font-size: 2em;
+  color: #00bcd4;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 992px) {
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+
+/* --- Mobile Navigation Menu (Dropdown) --- */
+.mobile-nav-menu {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  height: 100vh;
+  background-color: rgba(24, 24, 24, 0.98);
+  padding-top: 80px;
+  align-items: center;
+  justify-content: flex-start;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  z-index: 999;
+}
+
+.mobile-nav-menu.show {
+  display: flex;
+  transform: translateX(0);
+}
+
+.mobile-nav-menu .nav-link {
+  font-size: 1.5em;
+  padding: 15px 0;
+  margin: 10px 0;
+  width: 90%;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-menu .nav-link:last-of-type {
+  border-bottom: none;
+}
+
+@media (min-width: 993px) {
+  .mobile-nav-menu {
+    display: none;
+  }
+}
