@@ -37,7 +37,7 @@ const Pagination = props => {
         onClick={onPrevPage}
         disabled={pageNo === 1} // Disable Prev button on the first page
       >
-        Prev
+        {'<<'} Prev
       </button>
       <p className="page-no">{pageNo}</p>
       <button
@@ -46,7 +46,7 @@ const Pagination = props => {
         onClick={onNextPage}
         disabled={pageNo === totalPages} // Disable Next button on the last page
       >
-        Next
+        Next {'>>'}
       </button>
     </div>
   )

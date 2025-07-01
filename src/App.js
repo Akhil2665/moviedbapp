@@ -5,6 +5,7 @@ import UpcomingMovies from './components/UpcomingMovies'
 import TopRatedMovies from './components/TopRatedMovies'
 import MovieDetails from './components/MovieDetails'
 import SearchResultsPage from './components/SearchResultsPage'
+import Login from './components/Login'
 
 import './App.css'
 
@@ -15,6 +16,7 @@ const App = () => (
     <div className="main-content">
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/upcoming" component={UpcomingMovies} />
         <Route exact path="/top-rated" component={TopRatedMovies} />
         <Route exact path="/movieDetails/:id" component={MovieDetails} />
