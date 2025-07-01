@@ -3,6 +3,7 @@ import * as React from 'react'
 import Loader from 'react-loader-spinner'
 
 import MovieCard from '../Moviecard'
+import Pagination from '../Pagination'
 
 import './index.css'
 
@@ -10,11 +11,13 @@ const UpcomingMovies = () => {
   const [movieData, setMovieData] = React.useState([])
   const [currentPage, setCurrentPage] = React.useState(1)
   const [isLoading, setIsLoading] = React.useState(true)
+  const [totalPages, setTotalPages] = React.useState(1)
 
   const getResponse = async () => {
     const apiUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}&language=en-US&page=${currentPage}`
     const response = await fetch(apiUrl)
     const jsonData = await response.json()
+    setTotalPages(jsonData.total_pages)
     return jsonData.results
   }
 
@@ -42,13 +45,9 @@ const UpcomingMovies = () => {
     fetchData() // Call the async function
   }, [currentPage])
 
-  const incrementPageCount = () => {
-    setCurrentPage(prevState => prevState + 1)
-  }
-  const decrementPageCount = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prevState => prevState - 1)
-    }
+  const getResponseOfCurrentPage = pageNum => {
+    console.log('pageNum', pageNum)
+    setCurrentPage(pageNum)
   }
 
   return (
@@ -66,21 +65,10 @@ const UpcomingMovies = () => {
             ))}
           </ul>
           <div className="pagination-controller-container">
-            <button
-              className="pagination-btn"
-              type="button"
-              onClick={decrementPageCount}
-            >
-              {`<`}
-            </button>
-            <span>{currentPage}</span>
-            <button
-              className="pagination-btn"
-              type="button"
-              onClick={incrementPageCount}
-            >
-              {`>`}
-            </button>
+            <Pagination
+              totalPages={totalPages}
+              apiCallback={getResponseOfCurrentPage}
+            />
           </div>
         </div>
       )}

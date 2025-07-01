@@ -1,6 +1,7 @@
 import * as React from 'react'
-// import Pagination from '@mui/material/Pagination'
 import Loader from 'react-loader-spinner'
+
+import Pagination from '../Pagination'
 
 import MovieCard from '../Moviecard'
 
@@ -10,12 +11,14 @@ const Home = () => {
   const [movieData, setMovieData] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [currentPage, setCurrentPage] = React.useState(1)
+  const [totalPages, setTotalPages] = React.useState(1)
 
   const getResponse = async () => {
     const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}&language=en-US&page=${currentPage}`
     const response = await fetch(apiUrl)
     const jsonData = await response.json()
     console.log(jsonData)
+    setTotalPages(jsonData.total_pages)
     return jsonData.results
   }
 
@@ -43,13 +46,9 @@ const Home = () => {
     fetchData() // Call the async function
   }, [currentPage])
 
-  const incrementPageCount = () => {
-    setCurrentPage(prevState => prevState + 1)
-  }
-  const decrementPageCount = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prevState => prevState - 1)
-    }
+  const getResponseOfCurrentPage = pageNum => {
+    console.log('pageNum', pageNum)
+    setCurrentPage(pageNum)
   }
 
   return (
@@ -66,23 +65,10 @@ const Home = () => {
               <MovieCard key={eachMovie.id} movieDetails={eachMovie} />
             ))}
           </ul>
-          <div className="pagination-controller-container">
-            <button
-              className="pagination-btn"
-              type="button"
-              onClick={decrementPageCount}
-            >
-              {`<`}
-            </button>
-            <span>{currentPage}</span>
-            <button
-              className="pagination-btn"
-              type="button"
-              onClick={incrementPageCount}
-            >
-              {`>`}
-            </button>
-          </div>
+          <Pagination
+            totalPages={totalPages}
+            apiCallback={getResponseOfCurrentPage}
+          />
         </div>
       )}
     </>

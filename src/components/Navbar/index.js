@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {NavLink as RouterNavLink, useHistory, Link} from 'react-router-dom'
+import {useState} from 'react'
+import {useHistory, Link} from 'react-router-dom'
 
 // Import your CSS file
 import './index.css' // Make sure this path is correct for your CSS file
@@ -21,19 +21,8 @@ const Navbar = () => {
     }
   }
 
-  const handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      handleSearchClick()
-    }
-  }
-
   const toggleMobileMenu = () => {
     setShowMobileMenu(prevState => !prevState)
-  }
-
-  const handleNavLinkClick = path => {
-    history.push(path)
-    setShowMobileMenu(false) // Close mobile menu after navigation
   }
 
   return (
